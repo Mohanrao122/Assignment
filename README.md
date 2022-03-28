@@ -10,20 +10,21 @@ Technologies used for this project are Docker and minikube(kubernetes)
 
 
 2)
-**To Create of Docker Image to host nignix web-server and store nbs-guide content it**
+To Create of Docker Image to host nignix web-server and store nbs-guide content it
+
 FROM nginx
 ADD  /abs-guide /usr/share/nginx/html
 
 The above commands will pull nignx image and copy the contents of /abs-guide to /usr/share/nginx/html
  
 
-**Building a Docker image**
+Building a Docker image
 docker build -t <image_name> .
 <name> is the name of your image
 
 Use the Command "Docker images" to check if the image is created.
 
-**To Run a docker Image**
+To Run a docker Image
 docker run -d -p 8000:80 <image_name>
 -d is used to run the container in the detached mode(background)
 -p is the flag for mapping the port 8000 (local machine) to the port 80 in the container as 80 is the port on which nginx serves by default.
@@ -31,7 +32,7 @@ docker run -d -p 8000:80 <image_name>
 Using the above command you are runnig Nginx web server in your local machine. To check that open any browser and type "localhost:8000". This will display the content in nginx index.html file.index.html and all other *.html files are copied to nginx-web-server from abs-guide.
 
 
-**To make the image pubilcly available through dockerhub 
+To make the image pubilcly available through dockerhub 
 docker build -t Mohanrao122/assessment .
 docker push Mohanrao122/assessment
 
@@ -71,33 +72,34 @@ kind: Service = This says this is a service type of deployment. Which will be a 
 
 Specifications contains : type of service, port and targertPort being exposed.
 
-**Then will execute the commands one by one.**
 
-**Kubectl apply -f assesment-deployment.yml**  = to implement the configuration we have specified in the file
+Then will execute the commands one by one.
 
-**Kubectl apply -f service.yml** == to implement the configuration we have specified in the file
+Kubectl apply -f assesment-deployment.yml
+
+Kubectl apply -f service.yml 
 
 By implementing the above commnads both  assesment-deployment.yml and service.yml are now deployed in kubernetes cluster
 
 Excute the following commands to check if pod and service are successfully created 
 
-**Kubectl get pod**
-**Kubectl get service**
+Kubectl get pod
+Kubectl get service
 
 To Check the pod ip address 
-**kubectl get pod -o wide**
+kubectl get pod -o wide
 
 To check if the service is mapped to correct pod
-**kubectl describe service nginx-service
+kubectl describe service nginx-service
 
 To access the deployemnt
-**minikube service nginx-service**
+minikube service nginx-service
 
 Above command will automatically launch the browser and display the content in Nginx we-server
 
 Here what we have done that we have deployed our application to a POD that is running on a container on the Kubernetes cluster then we have exposed the service during the deployment so that all http requests can be redirected to the backend application “nginx”.
 
 
-**Conclusion**
+Conclusion
 We have successfully created a docker image to host the content of abs-guide in nginx web-server, then hosted that image in dockerhub and made it publicy accessable.so that we can use that image/container to host nginx web-server in kubernetes by assesment-deployment.yaml and service.yaml deployment.
 
